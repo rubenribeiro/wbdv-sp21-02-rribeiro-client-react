@@ -8,7 +8,7 @@ const CourseRow = (
         owner,
         lastModified,
         deleteCourse,
-        updateCourse
+        updateCourse,
     }) => {
     const [editing, setEditing] = useState(false);
     const [newTitle, setNewTitle] = useState(title);
@@ -19,36 +19,36 @@ const CourseRow = (
             ...course,
             title: newTitle
         }
-        updateCourse(course);
-
+        updateCourse(newCourse);
     }
 
-    return (<React.Fragment>
-        <tr>
-            <td>
+    return (
+        <div className="d-flex bg-light border border-secondary border-bottom-0">
+            <div className="flex-fill px-3 py-2">
                 {!editing &&
-                    <Link to="/courses/editor">
-                        {title}
+                    <Link className="text-secondary" to="/courses/editor">
+                        <i className="mr-2 fa fa-file-alt"></i>
+                        {course.title}
                     </Link>
-
                 }
-                {editing &&
+                { editing &&
                     <input
-                        onChange={ (event) => setNewTitle(event.target.value)}
+                        onChange={(event) => setNewTitle(event.target.value)}
                         value={newTitle}
                         className="form-control"/>
                 }
-            </td>
-            <td>{owner}</td>
-            <td>{lastModified}</td>
-            <td>
 
-                <i onClick={() => deleteCourse(course)} className="fas fa-trash"></i>
+            </div>
+            <div className="col-3 px-3 py-2 flex-fill text-center d-none d-md-block">
+                {owner}
+            </div>
+            <div className="col-3 px-3 py-2 text-center d-none d-lg-block">{lastModified}</div>
+            <div className="col-2 col-md-2 px-3 py-2 text-right">
+                <i onClick={() => deleteCourse(course)} className="fas fa-trash pr-2"></i>
                 { !editing && <i onClick = { () => setEditing(true)} className="fas fa-edit"></i> }
                 { editing && <i onClick = { () => saveTitle() } className="fas fa-check"></i> }
-            </td>
-        </tr>
-    </React.Fragment>);
+            </div>
+        </div>);
 }
 
 export default CourseRow;

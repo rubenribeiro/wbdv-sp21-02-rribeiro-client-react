@@ -11,13 +11,22 @@ export default class CourseTable
 
     render() {
         return (
-            <div>
-                <h2>Course Table</h2>
-                <Link to="/courses/grid">
-                    <i className="fas fa-2x fa-th float-right"></i>
-                </Link>
-                <table className="table">
-                    <tbody>
+            <React.Fragment>
+                <div className="d-flex bg-dark bg-fade border border-secondary text-light border-bottom-0">
+                    <div className="flex-fill px-3 py-2">Title</div>
+                    <div className="col-3 px-3 py-2 flex-fill text-center d-none d-md-block">
+                        Owned by
+                        <i className="fa fa-sort-down"></i>
+                    </div>
+                    <div className="col-3 px-3 py-2 text-center d-none d-lg-block">Last modified</div>
+                    <div className="col-2 col-md-2 px-3 py-2 text-right">
+                        <i className="fa  fa-folder pr-2"></i>
+                        <i className="fa fa-sort-alpha-up pr-3"></i>
+                        <Link to="/courses/grid">
+                            <i className="fa  fa-th text-light"></i>
+                        </Link>
+                    </div>
+                </div>
                        {
                            this.props.courses.map( (course, ndx) =>
                                <CourseRow
@@ -30,9 +39,7 @@ export default class CourseTable
                                    lastModified={course.lastModified}
                                />)
                        }
-                    </tbody>
-                </table>
-            </div>
+            </React.Fragment>
         );
     }
 }

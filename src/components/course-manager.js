@@ -3,7 +3,9 @@ import {Route} from 'react-router-dom';
 import CourseTable from "./course-table";
 import CourseGrid from "./course-grid";
 import CourseEditor from "./course-editor";
+import AppBar from "./course-appbar";
 import courseService, {findAllCourses, deleteCourse} from "../services/course-service";
+import App from "../App";
 
 class CourseManager extends React.Component {
     state = {
@@ -12,7 +14,8 @@ class CourseManager extends React.Component {
             {title: "CS5432", owner: "greg", lastModified: "1/4/32"},
             {title: "CS6543", owner: "herbert", lastModified: "1/2/32"},
             {title: "CS7654", owner: "frank", lastModified: "1/2/32"},
-        ]
+        ],
+        newCourseTitle: ''
     }
 
     componentDidMount() {
@@ -22,14 +25,20 @@ class CourseManager extends React.Component {
             }));
     }
 
+    handleCourseTitleInput = (event) => {
+        this.setState((prevState) => ({
+            ...prevState,
+            newCourseTitle: event.target.value
+        }));
+    }
+
     addCourse = () => {
         const newCourse = {
-            title: "New Course",
-            owner: "New Onwer",
-            lastModified: "Never",
+            title: this.state.newCourseTitle,
+            owner: "me",
+            lastModified: new Date().toLocaleDateString().split(",")[0]
         }
-        //this.state.courses.push(newCourse);
-        //this.setState(this.state);
+
         courseService.createCourse(newCourse)
             .then(course => this.setState( (prevState) => ({
                 ...prevState,
@@ -38,35 +47,44 @@ class CourseManager extends React.Component {
                     course
                 ]
             })));
+
     };
 
     deleteCourse = (courseToDelete) => {
+        console.log(courseToDelete);
 
         courseService.deleteCourse(courseToDelete._id)
             .then(status => {
-                this.setState((prevState) => {
-                    let nextState = {
+                this.setState((prevState) => ({
                         ...prevState,
                         courses: prevState.courses.filter(course => course !== courseToDelete)
-                    };
-                })
+                }))
             });
     };
 
     updateCourse = (course) => {
-        console.log(course);
         courseService.updateCourse(course._id, course)
             .then(status => this.setState((prevState) => ({
                 ...prevState,
-                courses: prevState.courses.map(c => c._id === course._id? course: c)
+                courses: prevState.courses.map(c => c._id === course._id ? course: c)
             })));
     }
 
     render() {
         return (
-            <div>
-                <h1>Course Manager</h1>
-                <button onClick={this.addCourse}>Add Course</button>
+            <React.Fragment>
+            <AppBar />
+            <main className="container position-relative">
+                <div className="mt-4 mb-3">
+                    <h1>Dashboard</h1>
+                </div>
+                <nav className="navbar navbar-expand-sm navbar-light bg-dark rounded-top justify-content-start">
+                    <span className="navbar-brand mb-0 h6 text-light d-none d-md-block"><i className="fa fa-bars"></i>&nbsp;&nbsp;&nbsp;Course Manager</span>
+                    <form className="mx-2 my-auto d-inline w-100">
+                        <input onChange={this.handleCourseTitleInput} type="text" className="form-control border border-right-0" value={this.newCourseTitle} placeholder="New Course Title" />
+                    </form>
+                    <button onClick={this.addCourse} type="button" className="btn btn-light  ml-2 mt-2 mt-sm-0 ml-sm-0"><i className="fa fa-plus"></i></button>
+                </nav>
                 <Route path="/courses/table">
                     <CourseTable
                         deleteCourse={this.deleteCourse}
@@ -86,7 +104,9 @@ class CourseManager extends React.Component {
                     render={ (props) => <CourseEditor {...props} />}
                 >
                 </Route>
-            </div>
+                <button onClick={this.addCourse} type="button" className="btn btn-dark shadow rounded rr-btn-add-course"><i className="fa fa-plus"></i></button>
+            </main>
+            </React.Fragment>
         );
     }
 }
