@@ -5,10 +5,6 @@ import CourseRow from "./course-row";
 export default class CourseTable
     extends React.Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <React.Fragment>

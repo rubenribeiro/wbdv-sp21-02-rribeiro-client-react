@@ -7,6 +7,7 @@ import AppBar from "./course-appbar";
 import courseService, {findAllCourses} from "../services/course-service";
 
 class CourseManager extends React.Component {
+
     state = {
         courses : [
             {title: "CS4321", owner: "frank", lastModified: "1/3/32"},
@@ -40,13 +41,14 @@ class CourseManager extends React.Component {
 
         courseService.createCourse(newCourse)
             .then(course => this.setState( (prevState) => ({
-                ...prevState,
-                courses: [
-                    ...prevState.courses,
-                    course
-                ],
-                newCourseTitle: ' ',
-            })));
+                    ...prevState,
+                    courses: [
+                        ...prevState.courses,
+                        course
+                    ],
+                    newCourseTitle: ' ',
+                }
+            )));
     };
 
     deleteCourse = (courseToDelete) => {
@@ -78,7 +80,7 @@ class CourseManager extends React.Component {
                 <nav className="navbar navbar-expand-sm navbar-light bg-dark rounded-top justify-content-start">
                     <span className="navbar-brand mb-0 h6 text-light d-none d-md-block"><i className="fa fa-bars"></i>&nbsp;&nbsp;&nbsp;Course Manager</span>
                     <form className="mx-2 my-auto d-inline w-100">
-                        <input onChange={this.handleCourseTitleInput} type="text" className="form-control border border-right-0" value={this.newCourseTitle} placeholder="New Course Title" />
+                        <input onChange={this.handleCourseTitleInput} type="text" className="form-control border border-right-0" value={this.state.newCourseTitle} placeholder="New Course Title" />
                     </form>
                     <button onClick={this.addCourse} type="button" className="btn btn-light  ml-2 mt-2 mt-sm-0 ml-sm-0"><i className="fa fa-plus"></i></button>
                 </nav>
