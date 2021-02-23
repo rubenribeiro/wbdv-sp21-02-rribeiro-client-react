@@ -1,7 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import CourseCard from "./course-card";
-import CourseRow from "./course-row";
 
 const CourseGrid = (
     {

@@ -4,8 +4,7 @@ import CourseTable from "./course-table";
 import CourseGrid from "./course-grid";
 import CourseEditor from "./course-editor";
 import AppBar from "./course-appbar";
-import courseService, {findAllCourses, deleteCourse} from "../services/course-service";
-import App from "../App";
+import courseService, {findAllCourses} from "../services/course-service";
 
 class CourseManager extends React.Component {
     state = {
@@ -45,14 +44,12 @@ class CourseManager extends React.Component {
                 courses: [
                     ...prevState.courses,
                     course
-                ]
+                ],
+                newCourseTitle: ' ',
             })));
-
     };
 
     deleteCourse = (courseToDelete) => {
-        console.log(courseToDelete);
-
         courseService.deleteCourse(courseToDelete._id)
             .then(status => {
                 this.setState((prevState) => ({

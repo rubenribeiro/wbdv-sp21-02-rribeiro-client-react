@@ -23,7 +23,7 @@ const CourseRow = (
     }
 
     return (
-        <div className="d-flex bg-light border border-secondary border-bottom-0">
+        <div className="d-flex bg-light border border-secondary border-bottom border-top-0">
             <div className="flex-fill px-3 py-2">
                 {!editing &&
                     <Link className="text-secondary" to="/courses/editor">

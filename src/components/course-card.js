@@ -36,7 +36,7 @@ const CourseCard = (
   return (
       <div className="col-12 col-sm-6 col-md-4 col-lg-3">
           <div className="card mt-4">
-              <img src="https://via.placeholder.com/286x180" className="card-img-top" alt="Card image" />
+              <img src="https://via.placeholder.com/286x180" className="card-img-top" alt="Card" />
               <div className="card-body">
                       {!editing &&
                           <Link className="text-secondary" to="/courses/editor">
