@@ -1,10 +1,23 @@
-import React from 'react';
+import React, { Fragment } from  'react';
+import { createStore, combineReducers } from 'redux';
+import { Provider } from 'react-redux'
+import { Link } from 'react-router-dom';
+import moduleReducer from "../reducers/module-reducer";
+import lessonReducer from "../reducers/lesson-reducer";
+import ModuleList from "./module-list";
+import LessonTabs from "./lesson-tabs";
 
-class CourseEditor extends React.Component {
-    render() {
-        let {history} = this.props;
-        return (
-            <React.Fragment>
+const reducer = combineReducers({
+    moduleReducer: moduleReducer,
+    lessonReducer: lessonReducer
+});
+//const store = createStore(moduleReducer);
+//const store = createStore(lessonReducer);
+const store = createStore(reducer);
+
+const CourseEditor = ({ history }) =>
+           <Provider store={store} >
+            <Fragment>
                 <div className="d-flex justify-content-between">
                     <h4><i onClick={history.goBack} className="fas fa-arrow-left"></i>&nbsp;&nbsp;Editing Course</h4>
                     <i onClick={history.goBack} className="fas fa-window-close pt-2 pr-4"></i>
@@ -13,13 +26,7 @@ class CourseEditor extends React.Component {
                     <span className="navbar-brand mb-0 h6 text-light">CS5610 - WebDev</span>
                     <div className="nav navbar-nav navbar-right">
                         <div className="btn-group" role="group" aria-label="Course Widgets">
-                            <button type="button" className="btn btn-secondary active">Build</button>
-                            <button type="button" className="btn btn-secondary">Pages</button>
-                            <button type="button" className="btn btn-secondary">Theme</button>
-                            <button type="button" className="btn btn-secondary">Store</button>
-                            <button type="button" className="btn btn-secondary">Apps</button>
-                            <button type="button" className="btn btn-secondary">Settings</button>
-                            <button type="button" className="btn btn-light"><i className="fa fa-plus"></i></button>
+                            <LessonTabs />
                         </div>
                     </div>
                 </nav>
@@ -28,39 +35,7 @@ class CourseEditor extends React.Component {
                         <div className="bg-dark">
                             <div className="btn-group-vertical d-flex ml-3 mr-3 pt-2" role="group"
                                  aria-label="Module Items">
-                                <button type="button"
-                                        className="btn btn-outline-secondary active btn-block text-left text-light mb-2">
-                                    Module 1 - Jquery <i className="pull-right pt-1 fa fa-window-close"></i>
-                                </button>
-                                <button type="button"
-                                        className="btn btn-outline-secondary btn-block text-left text-light mb-2">
-                                    Module 2 - React<i className="pull-right pt-1 fa fa-window-close"></i>
-                                </button>
-                                <button type="button"
-                                        className="btn btn-outline-secondary  btn-block text-left text-light mb-2">
-                                    Module 3 - Redux <i className="pull-right pt-1 fa fa-window-close"></i>
-                                </button>
-                                <button type="button"
-                                        className="btn btn-outline-secondary  btn-block text-left text-light  mb-2">
-                                    Module 4 - Native <i className="pull-right pt-1 fa fa-window-close"></i>
-                                </button>
-                                <button type="button"
-                                        className="btn btn-outline-secondary  btn-block text-left text-light mb-2">
-                                    Module 5 - Angular <i className="pull-right pt-1 fa fa-window-close"></i>
-                                </button>
-                                <button type="button"
-                                        className="btn btn-outline-secondary  btn-block text-left text-light mb-2">
-                                    Module 6 - Node <i className="pull-right pt-1 fa fa-window-close"></i>
-                                </button>
-                                <button type="button"
-                                        className="btn btn-outline-secondary  btn-block text-left text-light mb-2">
-                                    Module 7 - Mongo <i className="pull-right pt-1 fa fa-window-close"></i>
-                                </button>
-                                <p className="text-left w-100">
-                                    <button type="button" className="btn btn-outline-secondary pull-right mb-2">
-                                        <i className="pt-1 text-light fa fa-plus"></i>
-                                    </button>
-                                </p>
+                                <ModuleList />
                             </div>
                         </div>
                     </div>
@@ -76,9 +51,7 @@ class CourseEditor extends React.Component {
                         </div>
                     </div>
                 </div>
-            </React.Fragment>
-        );
-    }
-}
+            </Fragment>
+           </Provider>
 
 export default CourseEditor;
