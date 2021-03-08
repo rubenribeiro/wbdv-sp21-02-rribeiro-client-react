@@ -18,9 +18,6 @@ const lessonReducer = (state = initialState, action) => {
                 lessons: action.lessons
             }
         case "UPDATE_LESSON":
-            console.log("Update Lesson Triggered\n");
-            console.log(action.lesson);
-            console.log("AFTER ACTION PRINTED");
             return {
                 lessons: state.lessons.map(l => {
                     if(l._id === action.lesson._id) {
@@ -33,7 +30,7 @@ const lessonReducer = (state = initialState, action) => {
         case "DELETE_LESSON":
             return {
                 lessons: state.lessons.filter(lesson => {
-                    if (lesson._id == action.lessonToDelete._id) {
+                    if (lesson._id === action.lessonToDelete._id) {
                         return false;
                     } else {
                         return true;

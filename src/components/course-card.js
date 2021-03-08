@@ -39,12 +39,21 @@ const CourseCard = (
               <img src="https://via.placeholder.com/286x180" className="card-img-top" alt="Card" />
               <div className="card-body">
                       {!editing &&
-                          <Link className="text-secondary" to="/courses/editor">
+                          <Link
+                              className="text-secondary"
+                              to={{
+                              pathname: `/courses/grid/edit/${course._id}`,
+                                  state: {
+                                      title: title
+                                  }
+                              }}
+                          >
                               <h5 className="card-title">
-                                  {title}
+                                 {title}
                               </h5>
                           </Link>
                       }
+
                       { editing &&
                           <input
                               type="text"
@@ -57,7 +66,14 @@ const CourseCard = (
                   <p className="card-text">Some quick example text to build on the card title and make up the bulk
                       of the card's content.</p>
                   <div className="d-flex justify-content-between">
-                      <Link to="/courses/editor" className="btn btn-primary btn-dark">
+                      <Link
+                          to={{
+                              pathname: `/courses/grid/edit/${course._id}`,
+                              state: {
+                                  title: title
+                              }
+                          }}
+                          className="btn btn-primary btn-dark">
                           {title}
                       </Link>
                       <div>

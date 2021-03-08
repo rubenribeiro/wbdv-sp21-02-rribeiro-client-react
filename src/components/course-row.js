@@ -28,7 +28,13 @@ const CourseRow = (
                 {!editing &&
                     <Link
                         className="text-secondary"
-                        to={`/courses/table/edit/${course._id}`}>
+                        to={{
+                            pathname: `/courses/table/edit/${course._id}`,
+                            state: {
+                                title: newTitle
+                            }
+                        }}
+                    >
                         <i className="mr-2 fa fa-file-alt"></i>
                         {course.title}
                     </Link>

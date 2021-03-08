@@ -31,13 +31,11 @@ export const deleteModule = (moduleId) =>
     })
         .then( response => response.json());
 
-
-
 const api = {
     createModule,
     updateModule,
     findModulesForCourse,
     deleteModule
-}
+};
 
 export default api;

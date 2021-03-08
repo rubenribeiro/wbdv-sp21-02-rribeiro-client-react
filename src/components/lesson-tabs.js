@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import EditableItem from "./editable-item";
 import lessonService from "../services/lesson-service";
-import moduleService from "../services/module-service";
 
 const LessonTabs = (
     { lessons = [
@@ -16,20 +15,23 @@ const LessonTabs = (
       updateLesson,
       deleteLesson
     }) => {
-    const { layout, courseId, moduleId, lessonId } = useParams();
+    const { layout, courseId, moduleId, lessonId} = useParams();
 
     useEffect(() => {
-        console.log("LOAD LESSONS FOR MODULE: " + moduleId);
         if (moduleId !== "undefined" && typeof moduleId !== "undefined") {
             findLessonsForModule(moduleId);
         }
 
-    }, [moduleId]);
+    }, [moduleId, findLessonsForModule]);
 
     return (<Fragment>
         {
             lessons.map(lesson =>
-                <button key={lesson._id} type="button" className="btn btn-outline-secondary text-left text-light editor" disabled>
+                <button
+                    key={lesson._id}
+                    type="button"
+                    className={`btn btn-outline-secondary text-left text-light editor ${lesson._id === lessonId ? 'active' : '' }`}
+                    disabled>
                     <EditableItem
                         to={`/courses/${layout}/edit/${courseId}/modules/${moduleId}/lessons/${lesson._id}`}
                         updateItem={updateLesson}

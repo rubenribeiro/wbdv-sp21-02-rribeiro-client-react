@@ -14,16 +14,17 @@ const ModuleList = (
         findModulesForCourse
 
     }) => {
-    const { layout, courseId, moduleId } = useParams();
+    const { layout, courseId, moduleId, lessonId } = useParams();
     useEffect( () => {
         findModulesForCourse(courseId);
-    }, []);
+    }, [courseId, findModulesForCourse]);
     return( <Fragment>
         <div>
             <ul className="text-light">
                 <li>layout: {layout}</li>
                 <li>courseId: {courseId}</li>
                 <li>moduleId: {moduleId}</li>
+                <li>LessonId: {lessonId}</li>
             </ul>
         </div>
         {myModules.map(module =>
