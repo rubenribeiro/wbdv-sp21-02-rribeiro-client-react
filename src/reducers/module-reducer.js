@@ -9,16 +9,13 @@ const initialState = {
 const moduleReducer = (state = initialState, action) => {
     switch(action.type) {
         case "CREATE_MODULE":
-            const newState = {
+            return {
+                ...state,
                 modules: [
                     ...state.modules,
-                    {
-                        title: "New Module",
-                        _id: (new Date()).getTime()
-                    }
+                    action.module
                 ]
-            };
-            return newState;
+            }
         case "DELETE_MODULE":
             const newState1 = {
                 modules: state.modules.filter(module => {
@@ -39,6 +36,11 @@ const moduleReducer = (state = initialState, action) => {
                         return m;
                     }
                 })
+            }
+        case "FIND_MODULES_FOR_COURSE":
+            return {
+                ...state.modules,
+                modules: action.modules
             }
         default:
             return state;

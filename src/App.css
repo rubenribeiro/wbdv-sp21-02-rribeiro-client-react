@@ -18,3 +18,7 @@ rr-borderless {
 .fa-plus {
     cursor: pointer;
 }
+
+.editor a {
+    color: white !important;
+}

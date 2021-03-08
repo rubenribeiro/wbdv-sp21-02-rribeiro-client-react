@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route} from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import CourseTable from "./course-table";
 import CourseGrid from "./course-grid";
 import CourseEditor from "./course-editor";
@@ -84,14 +84,14 @@ class CourseManager extends React.Component {
                     </form>
                     <button onClick={this.addCourse} type="button" className="btn btn-light  ml-2 mt-2 mt-sm-0 ml-sm-0"><i className="fa fa-plus"></i></button>
                 </nav>
-                <Route path="/courses/table">
+                <Route path="/courses/table" exact={true}>
                     <CourseTable
                         deleteCourse={this.deleteCourse}
                         updateCourse={this.updateCourse}
                         courses={this.state.courses}
                     />
                 </Route>
-                <Route path="/courses/grid">
+                <Route path="/courses/grid" exact={true}>
                     <CourseGrid
                         deleteCourse={this.deleteCourse}
                         updateCourse={this.updateCourse}
@@ -99,7 +99,11 @@ class CourseManager extends React.Component {
                     />
                 </Route>
                 <Route
-                    path="/courses/editor"
+                    path={["/courses/:layout/edit/:courseId",
+                          "/courses/:layout/edit/:courseId/modules/:moduleId",
+                          "/courses/:layout/edit/:courseId/modules/:moduleId/lessons/:lessonId"
+                    ]}
+                    exact={true}
                     render={ (props) => <CourseEditor {...props} />}
                 >
                 </Route>

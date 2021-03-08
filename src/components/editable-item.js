@@ -1,8 +1,10 @@
 import React, {Fragment, useState} from 'react';
+import { Link } from 'react-router-dom';
 
 const EditableItem = (
     {
-        deleteItem = (itemToDelete) => alert("Default Delete Item" + itemToDelete._id),
+        to = "",
+        deleteItem,
         updateItem,
         item = {title: "Default Title", _id: "ABC"}
 
@@ -30,7 +32,10 @@ const EditableItem = (
         <Fragment>
             { !editing &&
                 <>
-                    {item.title}
+                    <Link to={to}>
+                        {item.title}
+                    </Link>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
                     <i onClick={handleEditing} className="fa fa-edit"></i>
                 </>
             }
@@ -41,8 +46,11 @@ const EditableItem = (
                         onChange={handleItemTitleChange}
                         value={cachedItem.title}
                     />
-                    <i onClick={handleCheck} className="fas fa-check"></i>
-                    <i onClick={ () => deleteItem(item)} className="fa fa-window-close"></i>
+                    <span>
+                        <i onClick={handleCheck} className="fas fa-check"></i>
+                        &nbsp;
+                        <i onClick={ () => deleteItem(item)} className="fa fa-window-close"></i>
+                    </span>
                 </>
             }
         </Fragment>

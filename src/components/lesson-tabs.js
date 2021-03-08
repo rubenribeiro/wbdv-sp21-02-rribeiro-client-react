@@ -1,24 +1,46 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { connect } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import EditableItem from "./editable-item";
+import lessonService from "../services/lesson-service";
+import moduleService from "../services/module-service";
 
 const LessonTabs = (
     { lessons = [
         {_id: "123", title: "Lesson A"},
         {_id: "123", title: "Lesson B"},
         {_id: "123", title: "Lesson C"}
-    ]
-    }) =>
-    <Fragment>
+    ],
+      findLessonsForModule,
+      createLessonForModule,
+      updateLesson,
+      deleteLesson
+    }) => {
+    const { layout, courseId, moduleId, lessonId } = useParams();
+
+    useEffect(() => {
+        console.log("LOAD LESSONS FOR MODULE: " + moduleId);
+        if (moduleId !== "undefined" && typeof moduleId !== "undefined") {
+            findLessonsForModule(moduleId);
+        }
+
+    }, [moduleId]);
+
+    return (<Fragment>
         {
             lessons.map(lesson =>
-                <button key={lesson._id} type="button" className="btn btn-secondary active">
-                    <EditableItem item={lesson} />
+                <button key={lesson._id} type="button" className="btn btn-outline-secondary text-left text-light editor" disabled>
+                    <EditableItem
+                        to={`/courses/${layout}/edit/${courseId}/modules/${moduleId}/lessons/${lesson._id}`}
+                        updateItem={updateLesson}
+                        deleteItem={deleteLesson}
+                        item={lesson}/>
                 </button>
             )
         }
-        <button type="button" className="btn btn-light"><i className="fa fa-plus"></i></button>
-    </Fragment>
+        <button onClick={() => createLessonForModule(moduleId)} type="button" className="btn btn-light"><i className="fa fa-plus"></i></button>
+    </Fragment>);
+}
 
 const stateToPropsMapper = (state) => {
     return {
@@ -27,6 +49,37 @@ const stateToPropsMapper = (state) => {
 };
 
 const dispatchToPropsMapper = (dispatch) => {
-
+    return {
+        findLessonsForModule: (moduleId) => {
+           lessonService.findLessonsForModule(moduleId)
+               .then(lessons => dispatch({
+                   type: "FIND_LESSONS",
+                   lessons
+               }));
+        },
+        createLessonForModule: (moduleId) => {
+            lessonService.createLessonForModule(moduleId,  {title: "New Lesson"})
+                .then(lesson => dispatch({
+                    type: "CREATE_LESSON",
+                    lesson
+            }));
+        },
+        updateLesson: (lesson) => {
+            lessonService.updateLesson(lesson._id, lesson)
+                .then(status => dispatch({
+                    type: "UPDATE_LESSON",
+                    lesson
+                }));
+        },
+        deleteLesson: (lessonToDelete) => {
+            lessonService.deleteLesson(lessonToDelete._id)
+                .then(status => dispatch({
+                    type: "DELETE_LESSON",
+                    lessonToDelete
+                }));
+        },
+    }
 };
+
+
 export default connect(stateToPropsMapper, dispatchToPropsMapper)(LessonTabs);
