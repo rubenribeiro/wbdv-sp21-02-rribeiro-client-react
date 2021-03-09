@@ -12,14 +12,14 @@ const TopicPills = ({
        deleteTopic
    }) => {
 
-    const { lessonId } = useParams();
+    const { courseId, moduleId, lessonId } = useParams();
 
     useEffect(() => {
         if (lessonId !== "undefined" && typeof lessonId !== "undefined") {
             findTopicsForLesson(lessonId);
         }
 
-    }, [lessonId, findTopicsForLesson]);
+    }, [lessonId, findTopicsForLesson, moduleId, courseId]);
 
     return (<Fragment>
         {

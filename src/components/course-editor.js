@@ -34,10 +34,8 @@ const CourseEditor = ({history, location}) => {
         <Fragment>
             <div className="d-flex justify-content-between">
                 <Link className="text-secondary d-flex justify-content-between" to={`/courses/${layout}`}>
-                    <h4><i className="fas fa-arrow-left"></i>&nbsp;&nbsp;Editing Course {layout} {courseId}</h4>
+                    <h4><i className="fas fa-window-close pt-4"></i><span className="pl-2">Editing Course</span></h4>
                 </Link>
-                <i onClick={history.goBack} className="fas fa-window-close pt-2 pr-4"></i>
-
             </div>
             <nav className="navbar navbar-light bg-dark rounded-top">
                 <span className="navbar-brand mb-0 h6 text-light">{cachedTitle}</span>

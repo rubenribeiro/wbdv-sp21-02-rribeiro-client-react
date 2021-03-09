@@ -19,14 +19,6 @@ const ModuleList = (
         findModulesForCourse(courseId);
     }, [courseId, findModulesForCourse]);
     return( <Fragment>
-        <div>
-            <ul className="text-light">
-                <li>layout: {layout}</li>
-                <li>courseId: {courseId}</li>
-                <li>moduleId: {moduleId}</li>
-                <li>LessonId: {lessonId}</li>
-            </ul>
-        </div>
         {myModules.map(module =>
             <button key={module._id} type="button"
                     className={`btn btn-outline-secondary btn-block text-left text-light mb-2 editor d-flex justify-content-between ${module._id === moduleId ? 'active' : '' }`} disabled>

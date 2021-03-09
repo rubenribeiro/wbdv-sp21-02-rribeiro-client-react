@@ -22,7 +22,7 @@ const LessonTabs = (
             findLessonsForModule(moduleId);
         }
 
-    }, [moduleId, findLessonsForModule]);
+    }, [moduleId, findLessonsForModule, courseId]);
 
     return (<Fragment>
         {
