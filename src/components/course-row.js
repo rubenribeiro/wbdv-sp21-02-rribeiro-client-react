@@ -35,7 +35,7 @@ const CourseRow = (
                             }
                         }}
                     >
-                        <i className="mr-2 fa fa-file-alt"></i>
+                        <i className="mr-2 fa  fa-file-alt"></i>
                         {course.title}
                     </Link>
                 }

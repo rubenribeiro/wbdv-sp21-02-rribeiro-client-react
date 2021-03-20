@@ -5,14 +5,17 @@ import { Link, useParams } from 'react-router-dom';
 import moduleReducer from "../reducers/module-reducer";
 import lessonReducer from "../reducers/lesson-reducer";
 import topicReducer from "../reducers/topic-reducer";
+import widgetReducer from "../reducers/widget-reducer";
 import ModuleList from "./module-list";
 import LessonTabs from "./lesson-tabs";
 import TopicPills from "./topic-pills";
+import WidgetList from "./course-editor/widgets/widget-list";
 
 const reducer = combineReducers({
     moduleReducer: moduleReducer,
     lessonReducer: lessonReducer,
-    topicReducer: topicReducer
+    topicReducer: topicReducer,
+    widgetReducer: widgetReducer
 });
 //const store = createStore(moduleReducer);
 //const store = createStore(lessonReducer);
@@ -21,6 +24,7 @@ const store = createStore(reducer);
 const CourseEditor = ({history, location}) => {
     const { layout, courseId} = useParams();
     const [cachedTitle, setCachedTitle] = useState("Course");
+
 
     useEffect(() => {
         if(location.state !== "undefined" && typeof location.state !== "undefined" ) {
@@ -57,6 +61,8 @@ const CourseEditor = ({history, location}) => {
                 <div className="col-8 pl-0">
                     <div className="border border-secondary pt-2 pl-2 h-100 text-light rr-course-editor">
                         <TopicPills />
+
+                        <WidgetList />
                     </div>
                 </div>
             </div>
