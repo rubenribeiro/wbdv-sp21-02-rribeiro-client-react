@@ -7,7 +7,7 @@ const ParagraphWidget = ({widget, editing, setEditingWidget}) => {
         const newWidget = {...paragraphWidget};
         newWidget["text"] = e.target.value;
         setParagraphWidget(newWidget);
-        setEditingWidget(paragraphWidget);
+        setEditingWidget(newWidget);
     };
 
     return(

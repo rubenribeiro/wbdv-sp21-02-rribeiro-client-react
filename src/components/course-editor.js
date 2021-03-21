@@ -8,7 +8,6 @@ import topicReducer from "../reducers/topic-reducer";
 import widgetReducer from "../reducers/widget-reducer";
 import ModuleList from "./module-list";
 import LessonTabs from "./lesson-tabs";
-import TopicPills from "./topic-pills";
 import WidgetList from "./course-editor/widgets/widget-list";
 
 const reducer = combineReducers({
@@ -22,7 +21,7 @@ const reducer = combineReducers({
 const store = createStore(reducer);
 
 const CourseEditor = ({history, location}) => {
-    const { layout, courseId} = useParams();
+    const { layout} = useParams();
     const [cachedTitle, setCachedTitle] = useState("Course");
 
 
@@ -60,7 +59,6 @@ const CourseEditor = ({history, location}) => {
                 </div>
                 <div className="col-8 pl-0">
                     <div className="border border-secondary pt-2 pl-2 h-100 text-light rr-course-editor">
-                        {/*<TopicPills />*/}
 
                         <WidgetList />
                     </div>

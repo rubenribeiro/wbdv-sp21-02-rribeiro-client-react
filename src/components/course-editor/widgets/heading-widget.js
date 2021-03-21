@@ -7,15 +7,14 @@ const HeadingWidget = ({widget, editing, setEditingWidget}) => {
         const newWidget = {...headerWidget};
         newWidget["text"] = e.target.value;
         setHeaderWidget(newWidget);
-        setEditingWidget(headerWidget);
-
+        setEditingWidget(newWidget);
     };
 
     const handleSelectUpdate= (e) => {
         const newWidget = {...headerWidget};
         newWidget["size"] = parseInt(e.target.value);
         setHeaderWidget(newWidget);
-        setEditingWidget(headerWidget);
+        setEditingWidget(newWidget);
     };
 
     return(

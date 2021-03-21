@@ -1,4 +1,4 @@
-import React, {useState, useEffect, Fragment} from 'react';
+import React, {useState, useEffect} from 'react';
 import { connect } from 'react-redux';
 import HeadingWidget from "./heading-widget";
 import ParagraphWidget from "./paragraph-widget";
@@ -19,16 +19,15 @@ const WidgetList = ({
     const [editingWidget, setEditingWidget] = useState({});
     const { topicId } = useParams();
 
-
-
-    const handleUpdateWidget = (wid, editingWidget)  => {
-        updateWidget(wid, editingWidget);
+    const handleUpdateWidget = ()  => {
+        updateWidget(editingWidget.id, editingWidget);
         setEditingWidget({});
     };
 
     const updateWidgetType = (e) => {
         const newWidget = {...editingWidget};
         newWidget["type"] = e.target.value;
+        updateWidget(newWidget.id, newWidget);
         setEditingWidget(newWidget);
     };
 
@@ -37,21 +36,19 @@ const WidgetList = ({
             findWidgetsForTopic(topicId);
         }
 
-    }, [topicId,findWidgetsForTopic, editingWidget, setEditingWidget]);
+    }, [topicId,findWidgetsForTopic, editingWidget, setEditingWidget, updateWidget]);
 
     return(
         <div className="text-dark">
 
             <TopicPills />
-            <div className="mr-2 mt-3">
-
+            <div className="mr-2 mt-3 clearfix">
                 <button onClick={() => createWidgetForTopic(topicId)} type="button" className="btn btn-dark btn-sm float-right">
                     &nbsp;Add Widget&nbsp;&nbsp;<i className="fas button fa-plus"></i>
                 </button>
             </div>
 
-            <h2>Widget List ({widgets.length}) {editingWidget.id}</h2>
-            <ul className="list-group mt-2">
+            <ul className="list-group my-3">
                 {widgets.map(widget =>
                     <li className="list-group-item d-flex justify-content-between align-items-center mr-2" key={widget.id}>
 
@@ -85,7 +82,7 @@ const WidgetList = ({
                         {
                             editingWidget.id === widget.id &&
                             <div>
-                                <i onClick={() => handleUpdateWidget(widget.id, editingWidget)} className="fas fa fa-check"></i>
+                                <i onClick={handleUpdateWidget} className="fas fa fa-check"></i>
                                 <i onClick={() => deleteWidget(widget)} className="fas fa fa-trash pl-2"></i>
                             </div>
 
@@ -100,7 +97,6 @@ const WidgetList = ({
                     </li>
                 )}
             </ul>
-            {JSON.stringify(widgets)}
         </div>
     );
 }

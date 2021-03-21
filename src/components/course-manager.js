@@ -109,7 +109,7 @@ class CourseManager extends React.Component {
                     render={ (props) => <CourseEditor {...props} />}
                 >
                 </Route>
-                <button onClick={this.addCourse} type="button" className="btn btn-dark shadow rounded rr-btn-add-course"><i className="fa fa-plus"></i></button>
+                <button onClick={this.addCourse} type="button" className="btn btn-dark shadow rounded rr-btn-add-course">Add Course&nbsp;&nbsp;<i className="fa fa-plus"></i></button>
             </main>
             </React.Fragment>
         );
