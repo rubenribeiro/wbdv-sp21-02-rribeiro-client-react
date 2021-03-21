@@ -60,7 +60,7 @@ const CourseEditor = ({history, location}) => {
                 </div>
                 <div className="col-8 pl-0">
                     <div className="border border-secondary pt-2 pl-2 h-100 text-light rr-course-editor">
-                        <TopicPills />
+                        {/*<TopicPills />*/}
 
                         <WidgetList />
                     </div>

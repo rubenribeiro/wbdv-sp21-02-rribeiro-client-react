@@ -8,7 +8,7 @@
 /* Editor style */
 rr-borderless {
     border-radius: 0 !important;
-    color: red !important;
+    color: #ff0000 !important;
 }
 
 /* Editing */
@@ -23,6 +23,14 @@ rr-borderless {
     color: white !important;
 }
 
+
+
+.rr-topic {
+    background-color: #212529 !important;
+    opacity: 0.9 !important;
+}
+
 .rr-course-editor button.active  {
     background-color: rgba(255, 255, 255, .5);
+    opacity: .5 !important;
 }

@@ -13,7 +13,6 @@ const TopicPills = () => {
                     Topic 1
                 </Link>
             </li>
-
         </ul>
     );
 }

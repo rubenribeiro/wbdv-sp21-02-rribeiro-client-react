@@ -23,8 +23,15 @@ const HeadingWidget = ({widget, editing, setEditingWidget}) => {
             {
                 editing &&
                     <>
-                        <input onChange={(e) => handleInputUpdate(e)} value={headerWidget.text} className="form-control" />
-                        <select onChange={(e) => handleSelectUpdate(e) } value={headerWidget.size} className="form-control">
+                        <input
+                            onChange={(e) => handleInputUpdate(e)}
+                            value={headerWidget.text}
+                            className="form-control mt-2"
+                        />
+                        <select
+                            onChange={(e) => handleSelectUpdate(e) }
+                            value={headerWidget.size}
+                            className="form-control mt-2">
                             <option value={1}>Heading 1</option>
                             <option value={2}>Heading 2</option>
                             <option value={3}>Heading 3</option>

@@ -15,8 +15,10 @@ const ParagraphWidget = ({widget, editing, setEditingWidget}) => {
             {
                 editing &&
                 <>
-                     <textarea onChange={(e) => handleParagraphUpdate(e) } value={paragraphWidget.text} className="form-control">
-
+                     <textarea
+                         onChange={(e) => handleParagraphUpdate(e) }
+                         value={paragraphWidget.text}
+                         className="form-control mt-2">
                      </textarea>
                 </>
             }

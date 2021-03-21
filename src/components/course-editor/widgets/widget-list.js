@@ -1,13 +1,11 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, Fragment} from 'react';
 import { connect } from 'react-redux';
 import HeadingWidget from "./heading-widget";
 import ParagraphWidget from "./paragraph-widget";
 import { useParams } from 'react-router-dom';
 import widgetService from "../../../services/widget-service";
 
-
-// TODO Delete this
-import TopicPills from "../topic-pills";
+import TopicPills from "../../topic-pills";
 
 const WidgetList = ({
     widgets = [],
@@ -21,53 +19,83 @@ const WidgetList = ({
     const [editingWidget, setEditingWidget] = useState({});
     const { topicId } = useParams();
 
-    useEffect(() => {
-        if (topicId !== "undefined" && typeof topicId !== "undefined") {
-            findWidgetsForTopic(topicId);
-        }
 
-    }, [topicId, findWidgetsForTopic, editingWidget, setEditingWidget]);
 
     const handleUpdateWidget = (wid, editingWidget)  => {
         updateWidget(wid, editingWidget);
         setEditingWidget({});
     };
 
+    const updateWidgetType = (e) => {
+        const newWidget = {...editingWidget};
+        newWidget["type"] = e.target.value;
+        setEditingWidget(newWidget);
+    };
+
+    useEffect(() => {
+        if (topicId !== "undefined" && typeof topicId !== "undefined") {
+            findWidgetsForTopic(topicId);
+        }
+
+    }, [topicId,findWidgetsForTopic, editingWidget, setEditingWidget]);
+
     return(
         <div className="text-dark">
-            <i onClick={() => createWidgetForTopic(topicId)} className="fas fa-plus fa-2x float-right"></i>
-            <TopicPills />
-            <h2>Widget List ({widgets.length}) {editingWidget.id}</h2>
-            <ul className="list-group">
-                {widgets.map(widget =>
-                    <li className="list-group-item" key={widget.id}>
-                        {
-                            editingWidget.id === widget.id &&
-                                <>
-                                    <i onClick={() => handleUpdateWidget(widget.id, editingWidget)} className="fas fa fa-2x fa-check float-right"></i>
-                                    <i onClick={() => deleteWidget(widget.id)} className="fas fa fa-2x fa-trash float-right"></i>
-                                </>
 
-                        }
-                        {
-                            editingWidget.id !== widget.id &&
-                            <i onClick={() => setEditingWidget(widget)} className="fas fa fa-2x fa-cog float-right"></i>
-                        }
-                        {
-                            widget.type === "HEADING" &&
-                                <HeadingWidget
+            <TopicPills />
+            <div className="mr-2 mt-3">
+
+                <button onClick={() => createWidgetForTopic(topicId)} type="button" className="btn btn-dark btn-sm float-right">
+                    &nbsp;Add Widget&nbsp;&nbsp;<i className="fas button fa-plus"></i>
+                </button>
+            </div>
+
+            <h2>Widget List ({widgets.length}) {editingWidget.id}</h2>
+            <ul className="list-group mt-2">
+                {widgets.map(widget =>
+                    <li className="list-group-item d-flex justify-content-between align-items-center mr-2" key={widget.id}>
+
+                        <div className="flex-grow-1 mr-4 my-2">
+
+                            {
+                                editingWidget.id === widget.id &&
+                                <select onChange={updateWidgetType} value={editingWidget.type} className="form-control">
+                                    <option value="HEADING">Heading</option>
+                                    <option value="PARAGRAPH">Paragraph</option>
+                                </select>
+                            }
+
+                            {
+                                widget.type === "HEADING" &&
+                                    <HeadingWidget
+                                        editing={editingWidget.id === widget.id}
+                                        widget={editingWidget.id === widget.id? editingWidget : widget}
+                                        setEditingWidget={setEditingWidget}
+                                    />
+                            }
+                            {
+                                widget.type === "PARAGRAPH" &&
+                                <ParagraphWidget
                                     editing={editingWidget.id === widget.id}
-                                    widget={editingWidget.id === widget.id? setEditingWidget : widget}
+                                    widget={editingWidget.id === widget.id? editingWidget : widget}
                                     setEditingWidget={setEditingWidget}
                                 />
-                        }
+                            }
+                        </div>
                         {
-                            widget.type === "PARAGRAPH" &&
-                            <ParagraphWidget
-                                editing={editingWidget.id === widget.id}
-                                widget={editingWidget.id === widget.id? setEditingWidget : widget}
-                                setEditingWidget={setEditingWidget}
-                            />
+                            editingWidget.id === widget.id &&
+                            <div>
+                                <i onClick={() => handleUpdateWidget(widget.id, editingWidget)} className="fas fa fa-check"></i>
+                                <i onClick={() => deleteWidget(widget)} className="fas fa fa-trash pl-2"></i>
+                            </div>
+
+                        }
+
+                        {
+                            editingWidget.id !== widget.id &&
+                            <div>
+                                <i onClick={() => setEditingWidget(widget)} className="fas fa fa-cog float-right"></i>
+                            </div>
                         }
                     </li>
                 )}
@@ -89,7 +117,7 @@ const dispatchToPropsMapper = (dispatch) => {
         findWidgetsForTopic: (topicId) => {
             widgetService.findWidgetsForTopic(topicId)
                 .then(widgets => dispatch({
-                    type: "FIND_WIDGETS",
+                    type: "FIND_ALL_WIDGETS_FOR_TOPICS",
                     widgets
                 }));
         },
@@ -112,7 +140,7 @@ const dispatchToPropsMapper = (dispatch) => {
         deleteWidget: (widgetToDelete) => {
             widgetService.deleteWidget(widgetToDelete.id)
                 .then(status => dispatch({
-                    type: "DELETE_TOPIC",
+                    type: "DELETE_WIDGET",
                     widgetToDelete
                 }));
         }

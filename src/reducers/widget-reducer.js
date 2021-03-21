@@ -12,7 +12,7 @@ const widgetReducer = (state = initialState, action) => {
                     action.widget
                 ]
             }
-        case "FIND_WIDGETS":
+        case "FIND_ALL_WIDGETS_FOR_TOPICS":
             return {
                 ...state,
                 widgets: action.widgets

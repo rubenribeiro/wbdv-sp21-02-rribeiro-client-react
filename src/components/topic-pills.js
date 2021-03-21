@@ -12,7 +12,7 @@ const TopicPills = ({
        deleteTopic
    }) => {
 
-    const { courseId, moduleId, lessonId } = useParams();
+    const { layout, courseId, moduleId, lessonId, topicId } = useParams();
 
     useEffect(() => {
         if (lessonId !== "undefined" && typeof lessonId !== "undefined") {
@@ -24,9 +24,14 @@ const TopicPills = ({
     return (<Fragment>
         {
             topics.map(topic =>
-                    <button key={topic._id} type="button" className="btn btn-secondary btn-sm editor mr-2" disabled>
+                    <button
+                        key={topic._id}
+                        type="button"
+                        className= {`btn btn-dark btn-sm editor  mr-2 rr-topic ${topic._id === topicId ? 'active' : ''}`}
+                        disabled
+                    >
                         <EditableItem
-                            to="#"
+                            to={`/courses/${layout}/edit/${courseId}/modules/${moduleId}/lessons/${lessonId}/topics/${topic._id}`}
                             updateItem={updateTopic}
                             deleteItem={deleteTopic}
                             item={topic}

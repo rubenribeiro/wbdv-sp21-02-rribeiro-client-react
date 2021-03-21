@@ -1,11 +1,10 @@
-const WIDGETS_URL = "http://localhost:8080/api/widgets";
-const TOPICS_URL = "http://localhost:8080/api/topics";
+const WIDGETS_URL = "https://dry-brushlands-63182.herokuapp.com/api/widgets";
+const TOPICS_URL = "https://dry-brushlands-63182.herokuapp.com/api/topics";
 
 
 export const findWidgetsForTopic = (topicId) =>
     fetch(`${TOPICS_URL}/${topicId}/widgets`)
         .then(response => response.json())
-        //.then(widgets => setWidgets(widgets));
 
 
 export const createWidget = (topicId, widget) =>
@@ -16,9 +15,6 @@ export const createWidget = (topicId, widget) =>
             'content-type': 'application/json'
         }
     }).then(response => response.json())
-        //.then(actualWidget => {
-          //  setWidgets([...widgets, actualWidget])
-        //})
 
 export const deleteWidget = (wid) =>
     fetch(`${WIDGETS_URL}/${wid}`, {
