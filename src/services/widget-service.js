@@ -1,5 +1,8 @@
-const WIDGETS_URL = "https://dry-brushlands-63182.herokuapp.com/api/widgets";
-const TOPICS_URL = "https://dry-brushlands-63182.herokuapp.com/api/topics";
+
+//const WIDGETS_URL = "https://dry-brushlands-63182.herokuapp.com/api/widgets";
+//const TOPICS_URL = "https://dry-brushlands-63182.herokuapp.com/api/topics";
+const WIDGETS_URL = "http://localhost/api/widgets";
+const TOPICS_URL = "http://localhost/api/topics";
 
 
 export const findWidgetsForTopic = (topicId) =>
