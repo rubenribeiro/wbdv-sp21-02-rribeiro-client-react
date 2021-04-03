@@ -15,6 +15,7 @@ export default class CourseTable
                         <i className="fa fa-sort-down"></i>
                     </div>
                     <div className="col-3 px-3 py-2 text-center d-none d-lg-block">Last modified</div>
+                    <div className="col-2 px-3 py-2 text-center d-none d-lg-block">Quizzes</div>
                     <div className="col-2 col-md-2 px-3 py-2 text-right">
                         <i className="fa  fa-folder pr-2"></i>
                         <i className="fa fa-sort-alpha-up pr-3"></i>

@@ -85,6 +85,7 @@ const WidgetList = ({
                                 <ListWidget
                                     editing={editingWidget.id === widget.id}
                                     widget={editingWidget.id === widget.id? editingWidget : widget}
+                                    setEditingWidget={setEditingWidget}
                                 />
                             }
                             {
@@ -92,6 +93,7 @@ const WidgetList = ({
                                 <ImageWidget
                                     editing={editingWidget.id === widget.id}
                                     widget={editingWidget.id === widget.id? editingWidget : widget}
+                                    setEditingWidget={setEditingWidget}
                                 />
                             }
 

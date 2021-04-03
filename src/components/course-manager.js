@@ -4,6 +4,8 @@ import CourseTable from "./course-table";
 import CourseGrid from "./course-grid";
 import CourseEditor from "./course-editor";
 import AppBar from "./course-appbar";
+import QuizzesList from "./quizzes/quizzes-list";
+import Quiz from "./quizzes/quiz";
 import courseService, {findAllCourses} from "../services/course-service";
 
 class CourseManager extends React.Component {
@@ -97,6 +99,12 @@ class CourseManager extends React.Component {
                         updateCourse={this.updateCourse}
                         courses={this.state.courses}
                     />
+                </Route>
+                <Route path="/courses/:courseId/quizzes" exact={true}>
+                    <QuizzesList />
+                </Route>
+                <Route path="/courses/:courseId/quizzes/:quizId" exact={true}>
+                    <Quiz />
                 </Route>
                 <Route
                     path={["/courses/:layout/edit/:courseId",

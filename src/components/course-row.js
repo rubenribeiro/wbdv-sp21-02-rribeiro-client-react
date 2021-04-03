@@ -51,6 +51,12 @@ const CourseRow = (
                 {owner}
             </div>
             <div className="col-3 px-3 py-2 text-center d-none d-lg-block">{lastModified}</div>
+            <div className="col-2 px-3 py-2 text-center d-none d-lg-block">
+                <Link to={`/courses/${course._id}/quizzes`}>
+                    Quizzes
+                </Link>
+
+            </div>
             <div className="col-2 col-md-2 px-3 py-2 text-right">
                 <i onClick={() => deleteCourse(course)} className="fas fa-trash pr-2"></i>
                 { !editing && <i onClick = { () => setEditing(true)} className="fas fa-edit"></i> }
