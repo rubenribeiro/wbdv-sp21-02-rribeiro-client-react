@@ -17,12 +17,12 @@ const QuizzesList = () => {
     return (
         <div>
             <h2>Quizzes ({quizzes.length})</h2>
-            <ul>
+            <ul className="list-group">
                 {
                     quizzes.map((quiz) => {
                         return (
                             <Link to={`/courses/${courseId}/quizzes/${quiz._id}`}>
-                                <li>{quiz.title}</li>
+                                <li className="list-group-item">{quiz.title}</li>
                             </Link>
                         )
                     })

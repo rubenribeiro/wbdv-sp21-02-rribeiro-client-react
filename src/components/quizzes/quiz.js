@@ -17,11 +17,11 @@ const Quiz = () => {
     return (
         <div>
             <h3>Quiz {quizId} ({questions.length})</h3>
-            <ul>
+            <ul className="list-group">
                 {
                     questions.map((question) => {
                         return(
-                            <li key={question._id}>
+                            <li key={question._id} className="list-group-item">
                                 <Question question={question} />
                             </li>
                         )
