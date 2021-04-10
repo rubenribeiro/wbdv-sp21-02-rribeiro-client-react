@@ -66,7 +66,7 @@ const TrueFalseQuestion = ({question}) => {
                         <i className="fas fa-times ml-2 text-danger"></i>
                     }
                     {graded && yourAnswer === 'true' && question.correct === 'false' &&
-                       <i className="fas fa-times ml-2 text-success"></i>
+                       <i className="fas fa-check ml-2 text-success"></i>
                     }
                 </li>
             </ul>

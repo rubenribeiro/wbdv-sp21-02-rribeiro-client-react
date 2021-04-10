@@ -6,6 +6,7 @@ import moduleReducer from "../reducers/module-reducer";
 import lessonReducer from "../reducers/lesson-reducer";
 import topicReducer from "../reducers/topic-reducer";
 import widgetReducer from "../reducers/widget-reducer";
+import quizReducer from "../reducers/quiz-reducer";
 import ModuleList from "./module-list";
 import LessonTabs from "./lesson-tabs";
 import WidgetList from "./course-editor/widgets/widget-list";
@@ -14,7 +15,8 @@ const reducer = combineReducers({
     moduleReducer: moduleReducer,
     lessonReducer: lessonReducer,
     topicReducer: topicReducer,
-    widgetReducer: widgetReducer
+    widgetReducer: widgetReducer,
+    quizReducer: quizReducer
 });
 //const store = createStore(moduleReducer);
 //const store = createStore(lessonReducer);
