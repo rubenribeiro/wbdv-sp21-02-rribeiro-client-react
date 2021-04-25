@@ -6,6 +6,7 @@ import CourseEditor from "./course-editor";
 import AppBar from "./course-appbar";
 import QuizzesList from "./quizzes/quizzes-list";
 import Quiz from "./quizzes/quiz";
+import QuizAttempts from "./quizzes/attempts/quiz-attempts";
 import courseService, {findAllCourses} from "../services/course-service";
 
 class CourseManager extends React.Component {
@@ -105,6 +106,9 @@ class CourseManager extends React.Component {
                 </Route>
                 <Route path="/courses/:courseId/quizzes/:quizId" exact={true}>
                     <Quiz />
+                </Route>
+                <Route path="/courses/:courseId/quizzes/:quizId/attempts" exact={true}>
+                    <QuizAttempts />
                 </Route>
                 <Route
                     path={["/courses/:layout/edit/:courseId",

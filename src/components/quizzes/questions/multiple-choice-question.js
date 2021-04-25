@@ -1,12 +1,41 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 
-const MultipleChoiceQuestion = ({question}) => {
+const MultipleChoiceQuestion = ({question, questions, setQuestions}) => {
     const [yourAnswer, setYourAnswer] = useState('');
     const [graded, setGraded] = useState(false);
 
     const handleGrade = () => {
         setGraded(true);
+        let updateQuestions = questions.map((q) => {
+            if (question.title === q.title) {
+                return {
+                    ...q,
+                    answer: yourAnswer
+                }
+            }
+
+            return q;
+
+        })
+        setQuestions(updateQuestions);
     };
+
+    const handleChange = () => {
+        let updateQuestions = questions.map((q) => {
+            if (question.title === q.title) {
+                return {
+                    ...q,
+                    answer: yourAnswer
+                }
+            }
+
+            return q;
+
+        })
+        setQuestions(updateQuestions);
+    }
+
+
     return(
         <div>
             <h5>
@@ -30,6 +59,7 @@ const MultipleChoiceQuestion = ({question}) => {
                                         onClick={() => {
                                             setYourAnswer(choice);
                                             setGraded(false);
+                                            handleChange();
                                         }}
                                         type="radio"
                                         className="mr-1"

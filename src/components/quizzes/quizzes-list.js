@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Link, useParams} from 'react-router-dom';
-import quizService from "../../services/quiz-service";
+import quizService from "../../services/quizzes-service";
 
 const QuizzesList = () => {
     const [quizzes, setQuizzes] = useState([]);
@@ -20,7 +20,7 @@ const QuizzesList = () => {
                 {
                     quizzes.map((quiz) => {
                         return (
-                            <li className="list-group-item d-flex justify-content-between">
+                            <li key={quiz._id} className="list-group-item d-flex justify-content-between">
                                 <Link to={`/courses/${courseId}/quizzes/${quiz._id}`}>
                                     {quiz.title}
                                 </Link>
@@ -37,3 +37,4 @@ const QuizzesList = () => {
 };
 
 export default QuizzesList;
+

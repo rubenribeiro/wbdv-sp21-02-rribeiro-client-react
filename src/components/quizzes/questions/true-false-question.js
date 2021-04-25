@@ -1,13 +1,39 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 
-const TrueFalseQuestion = ({question}) => {
+const TrueFalseQuestion = ({question, questions, setQuestions}) => {
     const [yourAnswer, setYourAnswer] = useState();
     const [graded, setGraded] = useState(false);
-    console.log(JSON.stringify(question));
 
     const handleGrade = () => {
         setGraded(true);
+        let updateQuestions = questions.map((q) => {
+            if (question.title === q.title) {
+                return {
+                    ...q,
+                    answer: yourAnswer
+                }
+            }
+
+            return q;
+
+        })
+        setQuestions(updateQuestions);
     };
+
+    const handleChange = () => {
+        let updateQuestions = questions.map((q) => {
+            if (question.title === q.title) {
+                return {
+                    ...q,
+                    answer: yourAnswer
+                }
+            }
+
+            return q;
+
+        })
+        setQuestions(updateQuestions);
+    }
 
     return(
         <div>
@@ -54,6 +80,7 @@ const TrueFalseQuestion = ({question}) => {
                             onClick={() => {
                                 setYourAnswer("false");
                                 setGraded(false);
+                                handleChange();
                             }}
                             className="mr-1"
                             type="radio"
